@@ -1,0 +1,654 @@
+﻿@model DataModel.Entities.Customer
+@{
+    ViewData["Title"] = "Müşteri Güncelle";
+}
+
+<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+    <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-customer"
+            type="button" role="tab" aria-controls="pills-customer" aria-selected="true">Müşteri Bilgileri</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-cars" type="button"
+            role="tab" aria-controls="pills-cars" aria-selected="false">Araç Bilgileri</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-insurancepolicy"
+            type="button" role="tab" aria-controls="pills-insurancepolicy" aria-selected="false">Poliçe
+            Bilgileri</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-payment"
+            type="button" role="tab" aria-controls="pills-payment" aria-selected="false">Ödeme Bilgileri</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="pills-disabled-tab" data-bs-toggle="pill" data-bs-target="#pills-accidents"
+            type="button" role="tab" aria-controls="pills-accidents" aria-selected="false">Kaza Bilgileri</button>
+    </li>
+</ul>
+<div class="tab-content" id="pills-tabContent">
+    <div class="tab-pane fade show active" id="pills-customer" role="tabpanel" aria-labelledby="pills-customer-tab"
+        tabindex="0">
+        <div class="card">
+            <div class="card-header">
+                Müşteri Bilgileri
+            </div>
+            <div class="card-body">
+                <form asp-controller="Home" asp-action="EditCustomer" method="post">
+                    <input type="hidden" asp-for="CustomerId">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Ad</label>
+                        <input type="text" asp-for="Name" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="surname" class="form-label">Soyad</label>
+                        <input type="text" class="form-control" asp-for="Surname">
+                    </div>
+                    <div class="mb-3">
+                        <label for="address" class="form-label">Adres</label>
+                        <textarea class="form-control" rows="3" asp-for="Address"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="dateofbirth" class="form-label">Doğum Tarihi</label>
+                        <input type="date" class="form-control" asp-for="DateOfBirth">
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" asp-for="Email">
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Telefon</label>
+                        <input type="tel" class="form-control" id="phone" asp-for="Phone">
+                    </div>
+                    <div class="mb-3">
+                        <label for="gender" class="form-label">Cinsiyet</label>
+                        <select class="form-select" aria-label="Seçiniz" asp-for="Gender">
+                            <option selected>Seçiniz</option>
+                            <option value="Kadın">Kadın</option>
+                            <option value="Erkek">Erkek</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-success btn-sm float-end" type="submit">Güncelle</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="pills-cars" role="tabpanel" aria-labelledby="pills-cars-tab" tabindex="0">
+
+        <div class="card" style="width: 100%;">
+            <div class="card-header">
+                Araç Listesi
+                <a href="@Url.Action("AddCustomer","Home")" class="btn btn-primary btn-sm float-end"
+                    data-bs-toggle="modal" data-bs-target="#addCar">Araç Ekle</a>
+            </div>
+            <div class="card-body">
+                <table class="table table-striped table-hover" id="carsTable">
+                    <thead>
+                        <tr>
+                            <th scope="col">Yıl</th>
+                            <th scope="col">Marka</th>
+                            <th scope="col">Model</th>
+                            <th scope="col">Alt Model</th>
+                            <th scope="col">Motor No</th>
+                            <th scope="col">Renk</th>
+                            <th scope="col">Plaka</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    <div class="tab-pane fade" id="pills-insurancepolicy" role="tabpanel" aria-labelledby="pills-insurancepolicy-tab"
+        tabindex="0">
+
+        <div class="card" style="width: 100%;">
+            <div class="card-header">
+                Araç Listesi
+                <a href="@Url.Action("AddPolicy","Home")" class="btn btn-primary btn-sm float-end"
+                    data-bs-toggle="modal" data-bs-target="#addPolicy">Poliçe Ekle</a>
+            </div>
+            <div class="card-body">
+                <table class="table table-striped table-hover" id="insurancepolicyTable">
+                    <thead>
+                        <tr>
+                            <th scope="col">Poliçe Numarası</th>
+                            <th scope="col">Başlangıç Tarihi</th>
+                            <th scope="col">Bitiş Tarihi</th>
+                            <th scope="col">Kapsam Türü</th>
+                            <th scope="col">Teminat Tutarı</th>
+                            <th scope="col">Araç Id</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    <div class="tab-pane fade" id="pills-payment" role="tabpanel" aria-labelledby="pills-payment-tab" tabindex="0">
+        <div class="card" style="width: 100%;">
+            <div class="card-header">
+                Araç Listesi
+                <a href="@Url.Action("AddPayment","Home")" class="btn btn-primary btn-sm float-end"
+                   data-bs-toggle="modal" data-bs-target="#addPayment">Ödeme Ekle</a>
+            </div>
+            <div class="card-body">
+                <table class="table table-striped table-hover" id="paymentTable">
+                    <thead>
+                        <tr>
+                            <th scope="col">Tutar</th>
+                            <th scope="col">Ödeme Tarihi</th>
+                            <th scope="col">Bitiş Tarihi</th>
+                            <th scope="col">Ödeme Türü</th>
+                            <th scope="col">Poliçe Id</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="pills-accidents" role="tabpanel" aria-labelledby="pills-accidents-tab" tabindex="0">
+        <div class="card" style="width: 100%;">
+            <div class="card-header">
+                Araç Listesi
+                <a href="@Url.Action("Addaccidents","Home")" class="btn btn-primary btn-sm float-end"
+                   data-bs-toggle="modal" data-bs-target="#addAccidents">Kaza Ekle</a>
+            </div>
+            <div class="card-body">
+                <table class="table table-striped table-hover" id="accidentsTable">
+                    <thead>
+                        <tr>
+                            <th scope="col">Tarih</th>
+                            <th scope="col">Açıklama</th>
+                            <th scope="col">Hasar Miktarı</th>
+                            <th scope="col">Konum</th>
+                            <th scope="col">Araç Id</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="addAccidents" tabindex="-1" aria-labelledby="addaccidentsModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="addCarModalLabel">Yeni Kaza Ekle</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="model" class="form-label">Kaza Tarihi</label>
+                    <input type="date" class="form-control" name="date">
+                </div>
+                <div class="mb-3">
+                    <label for="model" class="form-label">Açıklama</label>
+                    <input type="text" class="form-control" name="description">
+                </div>
+                <div class="mb-3">
+                    <label for="model" class="form-label">Tutar</label>
+                    <input type="text" class="form-control" name="damageamount">
+                </div>
+                <div class="mb-3">
+                    <label for="model" class="form-label">Konum</label>
+                    <input type="text" class="form-control" name="Location">
+                </div>
+                <div class="mb-3">
+                    <label for="model" class="form-label">Araç</label>
+                    <select class="form-select" aria-label="Seçiniz" name="carid">
+                        <option selected>Seçiniz</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                <button type="button" class="btn btn-primary" name="addAccidents">Kaydet</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="addPayment" tabindex="-1" aria-labelledby="addPaymentModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="addCarModalLabel">Yeni Ödeme Ekle</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="model" class="form-label">Ödeme Tarihi</label>
+                    <input type="date" class="form-control" name="paymentdate">
+                </div>
+                <div class="mb-3">
+                    <label for="model" class="form-label">Bitiş Tarihi</label>
+                    <input type="date" class="form-control" name="duedate">
+                </div>
+                <div class="mb-3">
+                    <label for="model" class="form-label">Ödeme Türü</label>
+                    <select class="form-select" aria-label="Seçiniz" name="paymentmethod">
+                        <option selected>Seçiniz</option>
+                        <option value="Kredi Kartı">Kredi Kartı</option>
+                        <option value="Havale/EFT">Havale/EFT</option>
+                        <option value="Nakit">Nakit</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="model" class="form-label">Tutar</label>
+                    <input type="text" class="form-control" name="amount">
+                </div>
+                <div class="mb-3">
+                    <label for="model" class="form-label">Poliçe</label>
+                    <select class="form-select" aria-label="Seçiniz" name="policyid">
+                        <option selected>Seçiniz</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                <button type="button" class="btn btn-primary" name="addPayment">Kaydet</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="addPolicy" tabindex="-1" aria-labelledby="addPolicyModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="addCarModalLabel">Yeni Poliçe Ekle</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="model" class="form-label">Başlangıç Tarihi</label>
+                    <input type="date" class="form-control" name="policystartdate">
+                </div>
+                <div class="mb-3">
+                    <label for="model" class="form-label">Bitiş Tarihi</label>
+                    <input type="date" class="form-control" name="policyenddate">
+                </div>
+                <div class="mb-3">
+                    <label for="model" class="form-label">Kapsam Türü</label>
+                    <input type="text" class="form-control" name="covargetype">
+                </div>
+                <div class="mb-3">
+                    <label for="model" class="form-label">Tutar</label>
+                    <input type="text" class="form-control" name="totalcovargeamount">
+                </div>
+                <div class="mb-3">
+                    <label for="model" class="form-label">Araç</label>
+                    <select class="form-select" aria-label="Seçiniz" name="carid">
+                        <option selected>Seçiniz</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                <button type="button" class="btn btn-primary" name="addPolicy">Kaydet</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="addCar" tabindex="-1" aria-labelledby="addCarModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="addCarModalLabel">Yeni Araç Ekle</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="brand" class="form-label">Marka</label>
+                    <input type="text" class="form-control" name="brand">
+                </div>
+                <div class="mb-3">
+                    <label for="model" class="form-label">Model</label>
+                    <input type="text" class="form-control" name="model">
+                </div>
+                <div class="mb-3">
+                    <label for="model" class="form-label">Alt Model</label>
+                    <input type="text" class="form-control" name="submodel">
+                </div>
+                <div class="mb-3">
+                    <label for="model" class="form-label">Renk</label>
+                    <input type="text" class="form-control" name="color">
+                </div>
+                <div class="mb-3">
+                    <label for="model" class="form-label">MotorNo</label>
+                    <input type="text" class="form-control" name="engineno">
+                </div>
+                <div class="mb-3">
+                    <label for="model" class="form-label">Plaka</label>
+                    <input type="text" class="form-control" name="plate">
+                </div>
+                <div class="mb-3">
+                    <label for="model" class="form-label">Yıl</label>
+                    <input type="text" class="form-control" name="year">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                <button type="button" class="btn btn-primary" name="addCar">Kaydet</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script type="text/javascript">
+
+        getCars = function (customerId) {
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("GetCars", "Home")',
+                data: {
+                    CustomerId: customerId
+                },
+                success: function (data) {
+                    var tbody = $('#carsTable tbody');
+                    var carSelect = $('[name="carid"]');
+                    tbody.empty();
+                    $.each(carSelect, function (key,value) {
+                        $(value).empty();
+                    })
+
+                    $.each(data, function (key, value) {
+
+                        var tr = $("<tr></tr>");
+                        tr.append("<td>" + value.year + "</td>");
+                        tr.append("<td>" + value.brand + "</td>");
+                        tr.append("<td>" + value.model + "</td>");
+                        tr.append("<td>" + value.subModel + "</td>");
+                        tr.append("<td>" + value.engineNo + "</td>");
+                        tr.append("<td>" + value.color + "</td>");
+                        tr.append("<td>" + value.plate + "</td>");
+                        var removeButton = tr.append("<td><button type='button' class='btn btn-danger btn-sm'>Sil</button></td>").click(function () {
+                            removePolicy(value.carId, customerId);
+                        });
+                        tr.append(removeButton);
+                        tbody.append(tr);
+
+                        $.each(carSelect, function (k, v) {
+                            $(v).append("<option value='" + value.carId + "'>" + value.brand + "</option>");
+                        });
+                    });
+                },
+                error: function (err) {
+                    console.log(err);
+                },
+                dataType: "json"
+            });
+        };
+        removePolicy = function (id,customerId) {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("DeletePolicy", "Home")',
+                data: {
+                    id: id
+                },
+                success: function (data) {
+                    getPolicy(customerId)
+                },
+                error: function (err) {
+                    console.log(err);
+                },
+                dataType: "json"
+            });
+        };
+
+        getPolicy = function (customerId) {
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("GetPolicy", "Home")',
+                data: {
+                    CustomerId: customerId
+                },
+                success: function (data) {
+                    var tbody = $('#insurancepolicyTable tbody');
+                    var policySelect = $('[name="policyid"]');
+                    tbody.empty();
+                    
+                    $.each(policySelect, function (k, v) {
+                        $(v).empty();
+                    });
+                    $.each(data, function (key, value) {
+                        var tr=$("<tr></tr>");
+                        tr.append("<td>" + value.policyNumber + "</td>");
+                        tr.append("<td>" + value.policyStartDate + "</td>");
+                        tr.append("<td>" + value.policyEndDate + "</td>");
+                        tr.append("<td>" + value.covargeType + "</td>");
+                        tr.append("<td>" + value.totalCovargeAmount + "</td>");
+                        tr.append("<td>" + value.carId + "</td>");
+                        var removeButton = tr.append("<td><button type='button' class='btn btn-danger btn-sm'>Sil</button></td>").click(function () {
+                            removePolicy(value.policyId, customerId);
+                        });
+                        tr.append(removeButton);
+                        tbody.append(tr);
+                        $.each(policySelect, function (k,v) {
+                            $(v).append("<option value='" + value.policyId + "'>" + value.policyNumber + "</option>");
+                        });
+                    });
+                },
+                error: function (err) {
+                    console.log(err);
+                },
+                dataType: "json"
+            });
+        };
+
+
+        removePayment = function (id, customerId) {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("DeletePayment", "Home")',
+                data: {
+                    id: id
+                },
+                success: function (data) {
+                    getPayment(customerId)
+                },
+                error: function (err) {
+                    console.log(err);
+                },
+                dataType: "json"
+            });
+        };
+
+        getPayment = function (customerId) {
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("GetPayment", "Home")',
+                data: {
+                    CustomerId: customerId
+                },
+                success: function (data) {
+                    var tbody = $('#paymentTable tbody');
+                    tbody.empty();
+                    $.each(data, function (key, value) {
+                        var tr = $("<tr></tr>");
+                        tr.append("<td>" + value.amount + "</td>");
+                        tr.append("<td>" + value.paymentDate + "</td>");
+                        tr.append("<td>" + value.dueDate + "</td>");
+                        tr.append("<td>" + value.paymentMethod + "</td>");
+                        tr.append("<td>" + value.policyId + "</td>");
+                        var removeButton = tr.append("<td><button type='button' class='btn btn-danger btn-sm'>Sil</button></td>").click(function () {
+                            removePayment(value.paymentId, customerId);
+                        });
+                        tr.append(removeButton);
+                        tbody.append(tr);
+                    });
+                },
+                error: function (err) {
+                    console.log(err);
+                },
+                dataType: "json"
+            });
+        };
+
+        removeAccidents = function (id, customerId) {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("DeleteAccidents", "Home")',
+                data: {
+                    id: id
+                },
+                success: function (data) {
+                    getAccidents(customerId);
+                },
+                error: function (err) {
+                    console.log(err);
+                },
+                dataType: "json"
+            });
+        };
+
+        getAccidents = function (customerId) {
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("GetAccidents", "Home")',
+                data: {
+                    CustomerId: customerId
+                },
+                success: function (data) {
+                    var tbody = $('#accidentsTable tbody');
+                    tbody.empty();
+                    $.each(data, function (key, value) {
+
+                        var tr = $("<tr></tr>");
+                        tr.append("<td>" + value.date + "</td>");
+                        tr.append("<td>" + value.description + "</td>");
+                        tr.append("<td>" + value.damageAmount + "</td>");
+                        tr.append("<td>" + value.location + "</td>");
+                        tr.append("<td>" + value.carId + "</td>");
+                        var removeButton = tr.append("<td><button type='button' class='btn btn-danger btn-sm'>Sil</button></td>").click(function () {
+                            removeAccidents(value.accidentId, customerId);
+                        });
+                        tr.append(removeButton);
+                        tbody.append(tr);
+                    });
+                },
+                error: function (err) {
+                    console.log(err);
+                },
+                dataType: "json"
+            });
+        };
+
+        getCars(@Model.CustomerId);
+        getPolicy(@Model.CustomerId);
+        getPayment(@Model.CustomerId);
+        getAccidents(@Model.CustomerId);
+
+
+        $('[name=addCar]').click(function () {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("AddCar", "Home")',
+                data: {
+                    Brand: $('[name=brand]').val(),
+                    Model: $('[name=model]').val(),
+                    Submodel: $('[name=submodel]').val(),
+                    Color: $('[name=color]').val(),
+                    Engineno: $('[name=engineno]').val(),
+                    Plate: $('[name=plate]').val(),
+                    Year: $('[name=year]').val(),
+                    CustomerId: '@Model.CustomerId'
+                },
+                success: function (e) {
+                    $('#addCar').modal("hide");
+                    getCars(@Model.CustomerId);
+                },
+                error: function (err) {
+                    console.log(err);
+                },
+                dataType: "json"
+            });
+        });
+
+        $('[name="addPolicy"]').click(function () {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("AddPolicy", "Home")',
+                data: {
+                    PolicyStartDate: $('[name=policystartdate]').val(),
+                    PolicyEndDate: $('[name=policyenddate]').val(),
+                    CovargeType: $('[name=covargetype]').val(),
+                    TotalCovargeAmount: $('[name=totalcovargeamount]').val(),
+                    CarId: $('[name=carid]').val()
+                },
+                success: function (e) {
+                    $('#addPolicy').modal("hide");
+                    getPolicy(@Model.CustomerId);
+                },
+                error: function (err) {
+                    console.log(err);
+                },
+                dataType: "json"
+            });
+        });
+        $('[name="addPayment"]').click(function () {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("AddPayment", "Home")',
+                data: {
+                    Amount: $('[name=amount]').val(),
+                    PaymentDate: $('[name=paymentdate]').val(),
+                    DueDate: $('[name=duedate]').val(),
+                    PaymentMethod: $('[name=paymentmethod]').val(),
+                    PolicyId: $('[name=policyid]').val()
+                },
+                success: function (e) {
+                    $('#addPayment').modal("hide");
+                    getPayment(@Model.CustomerId);
+                },
+                error: function (err) {
+                    console.log(err);
+                },
+                dataType: "json"
+            });
+        });
+        $('[name="addAccidents"]').click(function () {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("AddAccidents", "Home")',
+                data: {
+                    Date: $('[name=date]').val(),
+                    Description: $('[name=description]').val(),
+                    DamageAmount: $('[name=damageamount]').val(),
+                    Location: $('[name=Location]').val(),
+                    CarId: $('[name=carid]').val()
+                },
+                success: function (e) {
+                    $('#addAccidents').modal("hide");
+                    getAccidents(@Model.CustomerId);
+                },
+                error: function (err) {
+                    console.log(err);
+                },
+                dataType: "json"
+            });
+        });
+
+    </script>
+}
