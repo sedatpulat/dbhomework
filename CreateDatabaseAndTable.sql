@@ -14,7 +14,7 @@ CREATE TABLE public.accidents (
 	description varchar NULL,
 	damageamount numeric NULL,
 	"Location" varchar NULL,
-	carid int4 NULL
+	carid int NULL
 );
 
 
@@ -27,7 +27,7 @@ CREATE TABLE public.car (
 	engineno varchar NULL,
 	color varchar NULL,
 	plate varchar NULL,
-	customerid int4 NULL
+	customerid int NULL
 );
 
 
@@ -49,7 +49,7 @@ CREATE TABLE public.insurancepolicy (
 	policystartdate date NULL,
 	policyenddate date NULL,
 	totalcovargeamount numeric NULL,
-	carid int4 NULL,
+	carid int NULL,
 	covargetype varchar NULL
 );
 
