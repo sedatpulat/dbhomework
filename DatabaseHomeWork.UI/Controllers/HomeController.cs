@@ -75,12 +75,20 @@ namespace DatabaseHomeWork.UI.Controllers
         [HttpPost]
         public ActionResult AddPolicy(DataModel.Entities.InsurancePolicy insurancePolicy)
         {
-            Random r = new Random();
-            insurancePolicy.PolicyNumber = r.Next().ToString();
-            _dbModelContext.InsurancePolicys.Add(insurancePolicy);
-            _dbModelContext.SaveChanges();
+            var findCarPolicy = _dbModelContext.InsurancePolicys.FirstOrDefault(x => x.CarId == insurancePolicy.CarId && insurancePolicy.PolicyStartDate <= x.PolicyStartDate && insurancePolicy.PolicyEndDate >= insurancePolicy.PolicyEndDate);
+            if (findCarPolicy == null)
+            {
+                Random r = new Random();
+                insurancePolicy.PolicyNumber = r.Next().ToString();
+                _dbModelContext.InsurancePolicys.Add(insurancePolicy);
+                _dbModelContext.SaveChanges();
 
-            return Json(true);
+                return Json(true);
+            }
+            else
+            {
+                return Json("Bu araç için eklenmiş poliçe bulunmaktadır.");
+            }
         }
 
         public ActionResult GetPolicy(int customerId)
@@ -89,14 +97,27 @@ namespace DatabaseHomeWork.UI.Controllers
             var list = _dbModelContext.InsurancePolicys.Where(x => carList.Contains(x.CarId)).ToList();
             return Json(list);
         }
+        public ActionResult GetItemPolicy(int policyId)
+        {
+            var item = _dbModelContext.InsurancePolicys.FirstOrDefault(x => x.PolicyId == policyId);
+            return Json(item);
+        }
 
         [HttpPost]
         public ActionResult AddPayment(DataModel.Entities.PremiumPayment premiumPayment)
         {
-            _dbModelContext.PremiumPayments.Add(premiumPayment);
-            _dbModelContext.SaveChanges();
+            var findPayment = _dbModelContext.PremiumPayments.FirstOrDefault(x => x.PolicyId == premiumPayment.PolicyId);
+            if (findPayment == null)
+            {
+                _dbModelContext.PremiumPayments.Add(premiumPayment);
+                _dbModelContext.SaveChanges();
 
-            return Json(true);
+                return Json(true);
+            }
+            else
+            {
+                return Json("Bu poliçe için ödeme işlemi yapılmıştır!");
+            }
         }
 
         public ActionResult GetPayment(int customerId)
