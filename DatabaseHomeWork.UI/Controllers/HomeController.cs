@@ -159,6 +159,11 @@ namespace DatabaseHomeWork.UI.Controllers
         [HttpPost]
         public ActionResult DeletePolicy(int id)
         {
+            var checkPayment = _dbModelContext.PremiumPayments.FirstOrDefault(x => x.PolicyId == id);
+            if (checkPayment != null)
+            {
+                return Json("Bu poliçeye ait ödeme kaydı bulunmaktadır! Lütfen ilk önce ödeme kaydını siliniz.");
+            }
             var item = _dbModelContext.InsurancePolicys.FirstOrDefault(x => x.PolicyId == id);
             _dbModelContext.InsurancePolicys.Attach(item);
             _dbModelContext.InsurancePolicys.Remove(item);
@@ -169,6 +174,16 @@ namespace DatabaseHomeWork.UI.Controllers
         [HttpPost]
         public ActionResult DeleteCar(int id)
         {
+            var findPolicy = _dbModelContext.InsurancePolicys.FirstOrDefault(x => x.CarId == id);
+            if (findPolicy != null)
+            {
+                return Json("Bu araca ait poliçe kaydı bulunmaktadır! Lütfen ilk önce poliçe kaydını siliniz.");
+            }
+            var findAccidents = _dbModelContext.Accidents.FirstOrDefault(x => x.CarId == id);
+            if (findAccidents != null)
+            {
+                return Json("Bu araca ait kaza kaydı bulunmaktadır! Lütfen ilk önce kaza kaydını siliniz.");
+            }
             var item = _dbModelContext.Cars.FirstOrDefault(x => x.CarId == id);
             _dbModelContext.Cars.Attach(item);
             _dbModelContext.Cars.Remove(item);
