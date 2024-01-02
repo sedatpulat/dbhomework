@@ -12,31 +12,31 @@
 
             <div class="mb-3">
                 <label for="name" class="form-label">Ad</label>
-                <input type="text" asp-for="Name" class="form-control">
+                <input type="text" asp-for="Name" class="form-control" required>
             </div>
             <div class="mb-3">
                 <label for="surname" class="form-label">Soyad</label>
-                <input type="text" class="form-control" asp-for="Surname">
+                <input type="text" class="form-control" asp-for="Surname" required>
             </div>
             <div class="mb-3">
                 <label for="address" class="form-label">Adres</label>
-                <textarea class="form-control" rows="3" asp-for="Address"></textarea>
+                <textarea class="form-control" rows="3" asp-for="Address" required></textarea>
             </div>
             <div class="mb-3">
                 <label for="dateofbirth" class="form-label">Doğum Tarihi</label>
-                <input type="date" class="form-control" id="dateofbirth" asp-for="DateOfBirth" asp-format="dd-MM-yyyy">
+                <input type="date" class="form-control" id="dateofbirth" asp-for="DateOfBirth" asp-format="dd-MM-yyyy" required>
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" asp-for="Email">
+                <input type="email" class="form-control" id="email" asp-for="Email" required>
             </div>
             <div class="mb-3">
                 <label for="phone" class="form-label">Telefon</label>
-                <input type="tel" class="form-control" id="phone" asp-for="Phone">
+                <input type="number" maxlength="11" class="form-control" id="phone" asp asp-for="Phone" required>
             </div>
             <div class="mb-3">
                 <label for="gender" class="form-label">Cinsiyet</label>
-                <select class="form-select" aria-label="Seçiniz" asp-for="Gender">
+                <select class="form-select" aria-label="Seçiniz" asp-for="Gender" required>
                     <option selected>Seçiniz</option>
                     <option value="Kadın">Kadın</option>
                     <option value="Erkek">Erkek</option>

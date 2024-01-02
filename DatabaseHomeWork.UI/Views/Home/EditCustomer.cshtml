@@ -6,29 +6,39 @@
 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
     <li class="nav-item" role="presentation">
         <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-customer"
-            type="button" role="tab" aria-controls="pills-customer" aria-selected="true">Müşteri Bilgileri</button>
+                type="button" role="tab" aria-controls="pills-customer" aria-selected="true">
+            Müşteri Bilgileri
+        </button>
     </li>
     <li class="nav-item" role="presentation">
         <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-cars" type="button"
-            role="tab" aria-controls="pills-cars" aria-selected="false">Araç Bilgileri</button>
+                role="tab" aria-controls="pills-cars" aria-selected="false">
+            Araç Bilgileri
+        </button>
     </li>
     <li class="nav-item" role="presentation">
         <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-insurancepolicy"
-            type="button" role="tab" aria-controls="pills-insurancepolicy" aria-selected="false">Poliçe
-            Bilgileri</button>
+                type="button" role="tab" aria-controls="pills-insurancepolicy" aria-selected="false">
+            Poliçe
+            Bilgileri
+        </button>
     </li>
     <li class="nav-item" role="presentation">
         <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-payment"
-            type="button" role="tab" aria-controls="pills-payment" aria-selected="false">Ödeme Bilgileri</button>
+                type="button" role="tab" aria-controls="pills-payment" aria-selected="false">
+            Ödeme Bilgileri
+        </button>
     </li>
     <li class="nav-item" role="presentation">
         <button class="nav-link" id="pills-disabled-tab" data-bs-toggle="pill" data-bs-target="#pills-accidents"
-            type="button" role="tab" aria-controls="pills-accidents" aria-selected="false">Kaza Bilgileri</button>
+                type="button" role="tab" aria-controls="pills-accidents" aria-selected="false">
+            Kaza Bilgileri
+        </button>
     </li>
 </ul>
 <div class="tab-content" id="pills-tabContent">
     <div class="tab-pane fade show active" id="pills-customer" role="tabpanel" aria-labelledby="pills-customer-tab"
-        tabindex="0">
+         tabindex="0">
         <div class="card">
             <div class="card-header">
                 Müşteri Bilgileri
@@ -79,7 +89,7 @@
             <div class="card-header">
                 Araç Listesi
                 <a href="@Url.Action("AddCustomer","Home")" class="btn btn-primary btn-sm float-end"
-                    data-bs-toggle="modal" data-bs-target="#addCar">Araç Ekle</a>
+                   data-bs-toggle="modal" data-bs-target="#addCar">Araç Ekle</a>
             </div>
             <div class="card-body">
                 <table class="table table-striped table-hover" id="carsTable">
@@ -103,13 +113,13 @@
 
     </div>
     <div class="tab-pane fade" id="pills-insurancepolicy" role="tabpanel" aria-labelledby="pills-insurancepolicy-tab"
-        tabindex="0">
+         tabindex="0">
 
         <div class="card" style="width: 100%;">
             <div class="card-header">
                 Araç Listesi
                 <a href="@Url.Action("AddPolicy","Home")" class="btn btn-primary btn-sm float-end"
-                    data-bs-toggle="modal" data-bs-target="#addPolicy">Poliçe Ekle</a>
+                   data-bs-toggle="modal" data-bs-target="#addPolicy">Poliçe Ekle</a>
             </div>
             <div class="card-body">
                 <table class="table table-striped table-hover" id="insurancepolicyTable">
@@ -202,7 +212,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="model" class="form-label">Tutar</label>
-                    <input type="text" class="form-control" name="damageamount">
+                    <input type="number" class="form-control" name="damageamount">
                 </div>
                 <div class="mb-3">
                     <label for="model" class="form-label">Konum</label>
@@ -251,7 +261,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="model" class="form-label">Tutar</label>
-                    <input type="text" class="form-control" name="amount">
+                    <input type="number" class="form-control" name="amount">
                 </div>
                 <div class="mb-3">
                     <label for="model" class="form-label">Poliçe</label>
@@ -291,7 +301,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="model" class="form-label">Tutar</label>
-                    <input type="text" class="form-control" name="totalcovargeamount">
+                    <input type="number" class="form-control" name="totalcovargeamount">
                 </div>
                 <div class="mb-3">
                     <label for="model" class="form-label">Araç</label>
@@ -343,7 +353,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="model" class="form-label">Yıl</label>
-                    <input type="text" class="form-control" name="year">
+                    <input type="number" class="form-control" name="year">
                 </div>
             </div>
             <div class="modal-footer">
@@ -369,12 +379,12 @@
                     var tbody = $('#carsTable tbody');
                     var carSelect = $('[name="carid"]');
                     tbody.empty();
-                    $.each(carSelect, function (key,value) {
+
+                    $.each(carSelect, function (key, value) {
                         $(value).empty();
-                    })
+                    });
 
                     $.each(data, function (key, value) {
-
                         var tr = $("<tr></tr>");
                         tr.append("<td>" + value.year + "</td>");
                         tr.append("<td>" + value.brand + "</td>");
@@ -384,7 +394,7 @@
                         tr.append("<td>" + value.color + "</td>");
                         tr.append("<td>" + value.plate + "</td>");
                         var removeButton = tr.append("<td><button type='button' class='btn btn-danger btn-sm'>Sil</button></td>").click(function () {
-                            removePolicy(value.carId, customerId);
+                            removeCar(value.carId, customerId);
                         });
                         tr.append(removeButton);
                         tbody.append(tr);
@@ -400,15 +410,20 @@
                 dataType: "json"
             });
         };
-        removePolicy = function (id,customerId) {
+        removeCar = function (id, customerId) {
             $.ajax({
                 type: "POST",
-                url: '@Url.Action("DeletePolicy", "Home")',
+                url: '@Url.Action("DeleteCar", "Home")',
                 data: {
                     id: id
                 },
                 success: function (data) {
-                    getPolicy(customerId)
+                    if (data == true) {
+                        getCars(customerId)
+                    }
+                    else {
+                        alert(data);
+                    }
                 },
                 error: function (err) {
                     console.log(err);
@@ -416,6 +431,54 @@
                 dataType: "json"
             });
         };
+
+        removePolicy = function (id, customerId) {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("DeletePolicy", "Home")',
+                data: {
+                    id: id
+                },
+                success: function (data) {
+                    if (data == true) {
+                        getPolicy(customerId)
+                    }
+                    else {
+                        alert(data);
+                    }
+                },
+                error: function (err) {
+                    console.log(err);
+                },
+                dataType: "json"
+            });
+        };
+
+        setPolicyData = function (policyId) {
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("GetItemPolicy", "Home")',
+                data: {
+                    policyId: policyId
+                },
+                success: function (data) {
+                    if (data) {
+                        $('[name="paymentdate"]').val(moment(data.policyStartDate).format("YYYY-MM-DD"));
+                        $('[name="duedate"]').val(moment(data.policyEndDate).format("YYYY-MM-DD"));
+                        $('[name="amount"]').val(data.totalCovargeAmount);
+                    }
+                },
+                error: function (err) {
+                    console.log(err);
+                },
+                dataType: "json"
+            });
+        };
+
+        $('[name="policyid"]').change(function () {
+            var value = $(this).val();
+            setPolicyData(value);
+        });
 
         getPolicy = function (customerId) {
             $.ajax({
@@ -428,15 +491,15 @@
                     var tbody = $('#insurancepolicyTable tbody');
                     var policySelect = $('[name="policyid"]');
                     tbody.empty();
-                    
+
                     $.each(policySelect, function (k, v) {
                         $(v).empty();
                     });
                     $.each(data, function (key, value) {
-                        var tr=$("<tr></tr>");
+                        var tr = $("<tr></tr>");
                         tr.append("<td>" + value.policyNumber + "</td>");
-                        tr.append("<td>" + value.policyStartDate + "</td>");
-                        tr.append("<td>" + value.policyEndDate + "</td>");
+                        tr.append("<td>" + moment(value.policyStartDate).format("DD-MM-YYYY") + "</td>");
+                        tr.append("<td>" + moment(value.policyEndDate).format("DD-MM-YYYY") + "</td>");
                         tr.append("<td>" + value.covargeType + "</td>");
                         tr.append("<td>" + value.totalCovargeAmount + "</td>");
                         tr.append("<td>" + value.carId + "</td>");
@@ -445,7 +508,10 @@
                         });
                         tr.append(removeButton);
                         tbody.append(tr);
-                        $.each(policySelect, function (k,v) {
+                        $.each(policySelect, function (k, v) {
+                            if (key === 0) {
+                                $(v).append("<option>Seçiniz..</option>");
+                            }
                             $(v).append("<option value='" + value.policyId + "'>" + value.policyNumber + "</option>");
                         });
                     });
@@ -466,7 +532,12 @@
                     id: id
                 },
                 success: function (data) {
-                    getPayment(customerId)
+                    if (data == true) {
+                        getPayment(customerId)
+                    }
+                    else {
+                        alert(data);
+                    }
                 },
                 error: function (err) {
                     console.log(err);
@@ -488,8 +559,8 @@
                     $.each(data, function (key, value) {
                         var tr = $("<tr></tr>");
                         tr.append("<td>" + value.amount + "</td>");
-                        tr.append("<td>" + value.paymentDate + "</td>");
-                        tr.append("<td>" + value.dueDate + "</td>");
+                        tr.append("<td>" + moment(value.paymentDate).format("DD-MM-YYYY") + "</td>");
+                        tr.append("<td>" + moment(value.dueDate).format("DD-MM-YYYY") + "</td>");
                         tr.append("<td>" + value.paymentMethod + "</td>");
                         tr.append("<td>" + value.policyId + "</td>");
                         var removeButton = tr.append("<td><button type='button' class='btn btn-danger btn-sm'>Sil</button></td>").click(function () {
@@ -514,7 +585,12 @@
                     id: id
                 },
                 success: function (data) {
-                    getAccidents(customerId);
+                    if (data == true) {
+                        getAccidents(customerId);
+                    }
+                    else {
+                        alert(data);
+                    }
                 },
                 error: function (err) {
                     console.log(err);
@@ -536,7 +612,7 @@
                     $.each(data, function (key, value) {
 
                         var tr = $("<tr></tr>");
-                        tr.append("<td>" + value.date + "</td>");
+                        tr.append("<td>" + moment(value.date).format("DD-MM-YYYY") + "</td>");
                         tr.append("<td>" + value.description + "</td>");
                         tr.append("<td>" + value.damageAmount + "</td>");
                         tr.append("<td>" + value.location + "</td>");
@@ -585,7 +661,6 @@
                 dataType: "json"
             });
         });
-
         $('[name="addPolicy"]').click(function () {
             $.ajax({
                 type: "POST",
@@ -599,7 +674,12 @@
                 },
                 success: function (e) {
                     $('#addPolicy').modal("hide");
-                    getPolicy(@Model.CustomerId);
+                    if (e === true) {
+                        getPolicy(@Model.CustomerId);
+                    }
+                    else {
+                        alert(e);
+                    }
                 },
                 error: function (err) {
                     console.log(err);
@@ -620,7 +700,12 @@
                 },
                 success: function (e) {
                     $('#addPayment').modal("hide");
-                    getPayment(@Model.CustomerId);
+                    if (e === true) {
+                        getPayment(@Model.CustomerId);
+                    }
+                    else {
+                        alert(e);
+                    }
                 },
                 error: function (err) {
                     console.log(err);
